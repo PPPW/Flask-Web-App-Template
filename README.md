@@ -54,7 +54,6 @@ config.py: set configurations for the app. For example, you may want to use a di
 This folder contains static files, such as "css", "js", etc. If you use a front-end framework, such as React, Angular, Vue, etc., you can place the app files in this folder. 
 
 * "templates" folder:   
-
 This folder contains the view templates. 
 
    * layout.html: the master layout for the whole website. All other views will be inserted to the "body" block. 
