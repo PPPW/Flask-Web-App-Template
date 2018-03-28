@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}Index{% endblock %}
+
+{% block body %}
+<div class="page-header">
+    <h1>Hello!</h1>
+</div>
+
+<label>Click here to load some data:</label>
+<button id="load-data" class="btn btn-default">Load</button>
+
+<div id="data" style="margin-top:20px"></div>
+
+<script>
+    $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    $(function(){
+        $('#load-data').click(function(){
+            $.ajax({
+                url: $SCRIPT_ROOT + '/data',
+                type: 'GET',
+                success: function (data) {
+                    content = '<table class="table table-bordered table-striped"><tr>';
+                    for (var key in data[0]) {
+                        content += '<th>' + key + '</th>';
+                    }
+                    content += '</tr>';
+                    for (var i in data) {
+                        content += '<tr>';
+                        for (var key in data[i]) {
+                            content += '<td>' + data[i][key] + '</td>';
+                        }
+                        content += '</tr>';
+                    }
+                    content += '</table>';                    
+                    $('#data').html(content);
+                }
+            });
+        });
+    });
+</script>
+
+{% endblock %}
